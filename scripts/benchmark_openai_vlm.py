@@ -3,12 +3,18 @@ import base64
 import csv
 import json
 import os
+import ssl
 import time
 import urllib.error
 import urllib.request
 from pathlib import Path
 
 import cv2
+
+try:
+    import certifi
+except ImportError:
+    certifi = None
 
 
 EXPECTED_LABELS = {
@@ -77,8 +83,7 @@ def collect_clips(data_dir):
     return clips
 
 
-def make_prompt(folder):
-    expected = EXPECTED_LABELS.get(folder, "")
+def make_prompt():
     return f"""
 You are evaluating a short lacrosse video clip from sampled frames.
 
@@ -88,8 +93,8 @@ Choose exactly one label:
 - shot_save: a shot is taken and the goalie or defense saves/stops it
 - other: none of the above is clearly happening
 
-The folder label for this clip is "{folder}". Use the images, not the folder name, to decide.
-For folder label "shot", there may be a shot but the current benchmark has no plain shot class.
+Use only the sampled images to decide. You are not given the ground-truth folder label.
+Some clips may show a shot that misses or does not clearly result in a goal/save; label those as other unless a goal or save is clearly visible.
 
 Return only valid JSON with this schema:
 {{
@@ -97,8 +102,6 @@ Return only valid JSON with this schema:
   "confidence": 0.0,
   "reason": "brief visual reason"
 }}
-
-Known expected label used for scoring, if any: "{expected}".
 """.strip()
 
 
@@ -129,6 +132,9 @@ def call_openai(api_key, model, prompt, image_urls, max_retries):
         },
     }
     body = json.dumps(payload).encode("utf-8")
+    ssl_context = None
+    if certifi is not None:
+        ssl_context = ssl.create_default_context(cafile=certifi.where())
 
     for attempt in range(max_retries + 1):
         request = urllib.request.Request(
@@ -141,7 +147,7 @@ def call_openai(api_key, model, prompt, image_urls, max_retries):
             method="POST",
         )
         try:
-            with urllib.request.urlopen(request, timeout=120) as response:
+            with urllib.request.urlopen(request, timeout=120, context=ssl_context) as response:
                 return json.loads(response.read().decode("utf-8"))
         except urllib.error.HTTPError as exc:
             error_body = exc.read().decode("utf-8", errors="replace")
@@ -154,6 +160,11 @@ def call_openai(api_key, model, prompt, image_urls, max_retries):
                 time.sleep(2**attempt)
                 continue
             raise RuntimeError(f"OpenAI API network error: {exc}") from exc
+        except (ConnectionResetError, TimeoutError) as exc:
+            if attempt < max_retries:
+                time.sleep(2**attempt)
+                continue
+            raise RuntimeError(f"OpenAI API connection error: {exc}") from exc
 
 
 def extract_output_text(response):
@@ -253,7 +264,7 @@ def main():
             response = call_openai(
                 api_key=api_key,
                 model=args.model,
-                prompt=make_prompt(folder),
+                prompt=make_prompt(),
                 image_urls=frames,
                 max_retries=args.max_retries,
             )
