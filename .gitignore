@@ -3,6 +3,8 @@ __pycache__/
 *.pyc
 .venv/
 venv/
+.env
+.env.*
 
 # Local video data and raw footage
 data/**/*.mp4

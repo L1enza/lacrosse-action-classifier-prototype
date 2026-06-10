@@ -113,6 +113,35 @@ python3 scripts/evaluate_action_classifier.py \
   --output-dir outputs/evaluation_v1
 ```
 
+## Benchmark Against OpenAI Vision
+
+This project can also benchmark the same clips against an OpenAI vision model by sampling frames from each `.mp4` and asking the model to classify the clip.
+
+Set your API key locally:
+
+```bash
+export OPENAI_API_KEY="your_api_key_here"
+```
+
+Then run:
+
+```bash
+python3 scripts/benchmark_openai_vlm.py \
+  --data data/action_clips \
+  --output outputs/openai_vlm_benchmark/openai_predictions.csv \
+  --model gpt-5.5 \
+  --frames 6
+```
+
+Summarize the results:
+
+```bash
+python3 scripts/summarize_vlm_benchmark.py \
+  --csv outputs/openai_vlm_benchmark/openai_predictions.csv
+```
+
+Do not commit API keys, `.env` files, video clips, or `.pt` model weights.
+
 ## Next Steps
 
 - Add more clean `shot_save` clips.
