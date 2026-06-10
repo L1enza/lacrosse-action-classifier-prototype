@@ -110,7 +110,23 @@ def call_openai(api_key, model, prompt, image_urls, max_retries):
     payload = {
         "model": model,
         "input": [{"role": "user", "content": content}],
-        "text": {"format": {"type": "json_object"}},
+        "text": {
+            "format": {
+                "type": "json_schema",
+                "name": "lacrosse_action_prediction",
+                "strict": True,
+                "schema": {
+                    "type": "object",
+                    "additionalProperties": False,
+                    "properties": {
+                        "predicted_label": {"type": "string", "enum": LABELS},
+                        "confidence": {"type": "number", "minimum": 0, "maximum": 1},
+                        "reason": {"type": "string"},
+                    },
+                    "required": ["predicted_label", "confidence", "reason"],
+                },
+            }
+        },
     }
     body = json.dumps(payload).encode("utf-8")
 
