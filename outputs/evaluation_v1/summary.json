@@ -1,0 +1,36 @@
+{
+  "overall": {
+    "correct": 56,
+    "total": 84,
+    "accuracy": 0.6666666666666666
+  },
+  "accuracy_by_folder": {
+    "pass": {
+      "correct": 30,
+      "total": 33,
+      "accuracy": 0.9090909090909091
+    },
+    "goal": {
+      "correct": 9,
+      "total": 16,
+      "accuracy": 0.5625
+    },
+    "save": {
+      "correct": 1,
+      "total": 12,
+      "accuracy": 0.08333333333333333
+    },
+    "other": {
+      "correct": 16,
+      "total": 23,
+      "accuracy": 0.6956521739130435
+    }
+  },
+  "shot_distribution": {
+    "pass": 17,
+    "shot_goal": 9,
+    "other": 4,
+    "shot_save": 1
+  },
+  "total_rows": 115
+}
