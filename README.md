@@ -1,6 +1,6 @@
 # Prototype 2: Lacrosse Action Classifier
 
-This project is an early prototype for classifying short lacrosse video clips by play type. The current model is a clip-level classifier: each short `.mp4` clip is assigned one label based on the main action in the clip.
+This project is an early prototype for lacrosse action understanding. The current model is a clip-level classifier: each short `.mp4` clip gets one label based on the main action in the clip.
 
 Current labels:
 
@@ -9,21 +9,22 @@ Current labels:
 - `shot_save`
 - `other`
 
-The first prototype does not use player detection, ball detection, or tracking yet. It samples frames from the full video frame with OpenCV and trains a small PyTorch neural network to classify the clip.
+The next milestone is temporal action detection: running the classifier over a longer game clip with overlapping windows, then merging those predictions into a timestamped event timeline.
 
-## Current Results
+## Current No-Leakage Results
 
-Evaluation across the labeled clips produced:
+The latest four-class model was trained on `data/action_clips/no_leakage`. The shot goal/save validation games are separated from the shot training games, and pass/other use a more careful scorebox split than the original random-style setup.
 
-- Overall known-label accuracy: `56/84`, or `66.7%`
-- `pass`: `30/33`, or `91%`
-- `goal` mapped to `shot_goal`: `9/16`, or `56%`
-- `save` mapped to `shot_save`: `1/12`, or `8%`
-- `other`: `16/23`, or `70%`
+- Overall accuracy across train+val clips: `81/116`, or `69.8%`
+- Validation accuracy: `25/35`, or `71.4%`
+- `pass` validation accuracy: `5/8`, or `62.5%`
+- `shot_goal` validation accuracy: `10/12`, or `83.3%`
+- `shot_save` validation accuracy: `6/9`, or `66.7%`
+- `other` validation accuracy: `4/6`, or `66.7%`
 
-![Prototype 2 evaluation chart](outputs/evaluation_v1/action_classifier_summary.png)
+![No-leakage evaluation chart](outputs/no_leakage_evaluation_v1/action_classifier_summary.png)
 
-The main takeaway is that the model is already strong on passes, is starting to learn goals, and needs more clean `shot_save` examples.
+The main takeaway is that the project now has a cleaner benchmark. The model is not production-ready yet, but the scores are more believable than the first split because validation clips are less likely to be near-duplicates from the same moments.
 
 ## Project Structure
 
@@ -31,29 +32,29 @@ The main takeaway is that the model is already strong on passes, is starting to 
 Prototype 2/
   data/
     action_clips/
-      train/
-        pass/
-        goal/
-        save/
-        other/
-        shot/
-      val/
-        pass/
-        goal/
-        save/
-        other/
-        shot/
+      no_leakage/
+        train/
+          pass/
+          other/
+          shot_goal/
+          shot_save/
+        val/
+          pass/
+          other/
+          shot_goal/
+          shot_save/
   models/
-    action_classifier_v1/
+    action_classifier_no_leakage_v1/
       labels.json
   outputs/
-    evaluation_v1/
+    no_leakage_evaluation_v1/
       action_classifier_summary.png
       clip_predictions.csv
-      summary.json
+    long_video_predictions/
   scripts/
     train_action_classifier.py
     predict_action.py
+    long_video_predict.py
     evaluate_action_classifier.py
 ```
 
@@ -69,48 +70,92 @@ source .venv/bin/activate
 pip install -r requirements.txt
 ```
 
-## Train
+## Train The Current Four-Class Model
 
-Put short clips into the matching class folders under `data/action_clips/train` and `data/action_clips/val`.
+Put short clips into the matching class folders under `data/action_clips/no_leakage/train` and `data/action_clips/no_leakage/val`.
 
 Then run:
 
 ```bash
 python3 scripts/train_action_classifier.py \
-  --data data/action_clips \
-  --output models/action_classifier_v1 \
+  --data data/action_clips/no_leakage \
+  --output models/action_classifier_no_leakage_v1 \
   --epochs 12 \
   --batch-size 8 \
-  --frames 8 \
-  --size 96
+  --frames 16 \
+  --size 112 \
+  --label-map no_leakage_actions
 ```
 
-The current training script maps folders like this:
+The current no-leakage training script maps folders like this:
 
 ```text
 pass -> pass
-goal -> shot_goal
-save -> shot_save
 other -> other
+shot_goal -> shot_goal
+shot_save -> shot_save
 ```
 
-The `shot` folder is not used for training in v1 because the current model does not have a plain `shot` class.
-
-## Predict One Clip
+## Predict One Short Clip
 
 ```bash
 python3 scripts/predict_action.py \
-  --model models/action_classifier_v1/best.pt \
+  --model models/action_classifier_no_leakage_v1/best.pt \
   --clip "path/to/test_clip.mp4"
+```
+
+## Predict A Longer Video Timeline
+
+Use `long_video_predict.py` when you want to test a longer lacrosse video and produce timestamps.
+
+```bash
+python3 scripts/long_video_predict.py \
+  --model models/action_classifier_no_leakage_v1/best.pt \
+  --video "/Users/zllenza/Downloads/testPROTO.mp4" \
+  --output-dir outputs/long_video_predictions/testPROTO \
+  --window-seconds 3 \
+  --stride-seconds 1 \
+  --threshold 0.55
+```
+
+The script creates overlapping windows:
+
+```text
+0.0s - 3.0s
+1.0s - 4.0s
+2.0s - 5.0s
+...
+```
+
+Then it classifies each window, smooths nearby predictions, merges repeated labels, and writes:
+
+```text
+outputs/long_video_predictions/testPROTO/predictions_windows.csv
+outputs/long_video_predictions/testPROTO/predictions_events.csv
+outputs/long_video_predictions/testPROTO/predictions_events.json
+```
+
+The event JSON is the first bridge toward full event segmentation:
+
+```json
+[
+  {
+    "start": 12.0,
+    "end": 15.0,
+    "timestamp": "00:12.00 - 00:15.00",
+    "label": "pass",
+    "confidence": 0.82
+  }
+]
 ```
 
 ## Evaluate All Clips
 
 ```bash
 python3 scripts/evaluate_action_classifier.py \
-  --model models/action_classifier_v1/best.pt \
-  --data data/action_clips \
-  --output-dir outputs/evaluation_v1
+  --model models/action_classifier_no_leakage_v1/best.pt \
+  --data data/action_clips/no_leakage \
+  --output-dir outputs/no_leakage_evaluation_v1
 ```
 
 ## Benchmark Against OpenAI Vision
@@ -144,8 +189,8 @@ Do not commit API keys, `.env` files, video clips, or `.pt` model weights.
 
 ## Next Steps
 
-- Add more clean `shot_save` clips.
-- Tighten clips so each one has one main event.
-- Retrain as `action_classifier_v2`.
-- Add a Streamlit upload app for easier testing.
-- Later add YOLO-based player, goalie, and ball detection for better context.
+- Test `long_video_predict.py` on a 1-3 minute lacrosse clip.
+- Review `predictions_windows.csv` to see where the model is confused.
+- Save corrected event timestamps as training labels.
+- Add a Streamlit app that lets a user upload video, inspect the timeline, correct labels, and export corrected data.
+- Later add YOLO-based player, goalie, and ball/possession detection for stronger context.

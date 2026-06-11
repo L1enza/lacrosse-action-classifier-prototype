@@ -21,3 +21,4 @@ data/**/*.mkv
 outputs/**/*.mp4
 outputs/**/*.mov
 outputs/**/*.avi
+outputs/long_video_predictions/
