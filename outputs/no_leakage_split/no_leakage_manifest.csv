@@ -1,0 +1,117 @@
+source_split,source_folder,source_file,source_path,target_label,game_group,target_split,reason,target_path
+train,goal,My Movie.mp4,data/action_clips/train/goal/My Movie.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_My Movie.mp4
+train,goal,aaa.mp4,data/action_clips/train/goal/aaa.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_aaa.mp4
+train,goal,aaggaagoal.mp4,data/action_clips/train/goal/aaggaagoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_aaggaagoal.mp4
+train,goal,al.mp4,data/action_clips/train/goal/al.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_al.mp4
+train,goal,ddo.mp4,data/action_clips/train/goal/ddo.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_ddo.mp4
+train,goal,gaol.mp4,data/action_clips/train/goal/gaol.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_gaol.mp4
+train,goal,ggoal.mp4,data/action_clips/train/goal/ggoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_ggoal.mp4
+train,goal,gil.mp4,data/action_clips/train/goal/gil.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_gil.mp4
+train,goal,goaaals.mp4,data/action_clips/train/goal/goaaals.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_goaaals.mp4
+train,goal,goalase.mp4,data/action_clips/train/goal/goalase.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_goalase.mp4
+train,goal,goalww.mp4,data/action_clips/train/goal/goalww.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_goalww.mp4
+train,goal,goasol.mp4,data/action_clips/train/goal/goasol.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_goasol.mp4
+train,goal,op.mp4,data/action_clips/train/goal/op.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_op.mp4
+train,goal,pol.mp4,data/action_clips/train/goal/pol.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_pol.mp4
+train,goal,shot:goal.mp4,data/action_clips/train/goal/shot:goal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shot:goal.mp4
+train,goal,shot:goal2.mp4,data/action_clips/train/goal/shot:goal2.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shot:goal2.mp4
+train,goal,shotgaoal.mp4,data/action_clips/train/goal/shotgaoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shotgaoal.mp4
+train,goal,shotgoal.mp4,data/action_clips/train/goal/shotgoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shotgoal.mp4
+train,goal,shotgoalall.mp4,data/action_clips/train/goal/shotgoalall.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shotgoalall.mp4
+train,goal,shotgoall.mp4,data/action_clips/train/goal/shotgoall.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shotgoall.mp4
+train,goal,shotgoalll.mp4,data/action_clips/train/goal/shotgoalll.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shotgoalll.mp4
+train,goal,shotgoalllp.mp4,data/action_clips/train/goal/shotgoalllp.mp4,shot_goal,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_goal/train_shotgoalllp.mp4
+train,goal,shsotgoal.mp4,data/action_clips/train/goal/shsotgoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/train_shsotgoal.mp4
+val,goal,ggaaaol.mp4,data/action_clips/val/goal/ggaaaol.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/val_ggaaaol.mp4
+val,goal,hshshsotgoal.mp4,data/action_clips/val/goal/hshshsotgoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/val_hshshsotgoal.mp4
+val,goal,shawtgoal.mp4,data/action_clips/val/goal/shawtgoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/val_shawtgoal.mp4
+val,goal,shotaagoal.mp4,data/action_clips/val/goal/shotaagoal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/val_shotaagoal.mp4
+val,goal,ssshotgoaal.mp4,data/action_clips/val/goal/ssshotgoaal.mp4,shot_goal,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_goal/val_ssshotgoaal.mp4
+train,save,5r.mp4,data/action_clips/train/save/5r.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_5r.mp4
+train,save,My Movie.mp4,data/action_clips/train/save/My Movie.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_My Movie.mp4
+train,save,aa.mp4,data/action_clips/train/save/aa.mp4,shot_save,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_save/train_aa.mp4
+train,save,lo.mp4,data/action_clips/train/save/lo.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_lo.mp4
+train,save,p.mp4,data/action_clips/train/save/p.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_p.mp4
+train,save,po.mp4,data/action_clips/train/save/po.mp4,shot_save,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_save/train_po.mp4
+train,save,poiu.mp4,data/action_clips/train/save/poiu.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_poiu.mp4
+train,save,pol.mp4,data/action_clips/train/save/pol.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_pol.mp4
+train,save,polo.mp4,data/action_clips/train/save/polo.mp4,shot_save,COL_PC,val,visible COL/PC scorebox,data/action_clips/no_leakage/val/shot_save/train_polo.mp4
+train,save,qw.mp4,data/action_clips/train/save/qw.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_qw.mp4
+train,save,qwe.mp4,data/action_clips/train/save/qwe.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_qwe.mp4
+train,save,rrui.mp4,data/action_clips/train/save/rrui.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_rrui.mp4
+train,save,saal.mp4,data/action_clips/train/save/saal.mp4,shot_save,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_save/train_saal.mp4
+train,save,sapaps.mp4,data/action_clips/train/save/sapaps.mp4,shot_save,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/shot_save/train_sapaps.mp4
+train,save,saveyy.mp4,data/action_clips/train/save/saveyy.mp4,shot_save,COL_PC,val,visible COL/PC scorebox,data/action_clips/no_leakage/val/shot_save/train_saveyy.mp4
+train,save,sh0tssaaaave.mp4,data/action_clips/train/save/sh0tssaaaave.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_sh0tssaaaave.mp4
+train,save,shotsaaave.mp4,data/action_clips/train/save/shotsaaave.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_shotsaaave.mp4
+train,save,shotsave.mp4,data/action_clips/train/save/shotsave.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_shotsave.mp4
+train,save,shotsave2.mp4,data/action_clips/train/save/shotsave2.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_shotsave2.mp4
+train,save,shotsave3.mp4,data/action_clips/train/save/shotsave3.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_shotsave3.mp4
+train,save,shottsavee.mp4,data/action_clips/train/save/shottsavee.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_shottsavee.mp4
+train,save,shotttysave.mp4,data/action_clips/train/save/shotttysave.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_shotttysave.mp4
+train,save,ssaveeeeee.mp4,data/action_clips/train/save/ssaveeeeee.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/train_ssaveeeeee.mp4
+train,save,tyu.mp4,data/action_clips/train/save/tyu.mp4,shot_save,COL_PC,val,visible COL/PC scorebox,data/action_clips/no_leakage/val/shot_save/train_tyu.mp4
+train,save,wer.mp4,data/action_clips/train/save/wer.mp4,shot_save,COL_PC,val,visible COL/PC scorebox,data/action_clips/no_leakage/val/shot_save/train_wer.mp4
+train,save,wwe.mp4,data/action_clips/train/save/wwe.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_wwe.mp4
+train,save,yoiu.mp4,data/action_clips/train/save/yoiu.mp4,shot_save,COL_PC,val,visible COL/PC scorebox,data/action_clips/no_leakage/val/shot_save/train_yoiu.mp4
+train,save,you.mp4,data/action_clips/train/save/you.mp4,shot_save,TOR_ROC,train,visible TOR/ROC scorebox,data/action_clips/no_leakage/train/shot_save/train_you.mp4
+val,save,My Movie.mp4,data/action_clips/val/save/My Movie.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/val_My Movie.mp4
+val,save,shaaotsave.mp4,data/action_clips/val/save/shaaotsave.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/val_shaaotsave.mp4
+val,save,shottsav.mp4,data/action_clips/val/save/shottsav.mp4,shot_save,TOR_HFX,train,visible TOR/HFX scorebox,data/action_clips/no_leakage/train/shot_save/val_shottsav.mp4
+train,pass,My Movie.mp4,data/action_clips/train/pass/My Movie.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_My Movie.mp4
+train,pass,apapas.mp4,data/action_clips/train/pass/apapas.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_apapas.mp4
+train,pass,apappapapss.mp4,data/action_clips/train/pass/apappapapss.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_apappapapss.mp4
+train,pass,paaaaass.mp4,data/action_clips/train/pass/paaaaass.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_paaaaass.mp4
+train,pass,paaaaasss.mp4,data/action_clips/train/pass/paaaaasss.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_paaaaasss.mp4
+train,pass,paaaass.mp4,data/action_clips/train/pass/paaaass.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_paaaass.mp4
+train,pass,paaas.mp4,data/action_clips/train/pass/paaas.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/train_paaas.mp4
+train,pass,papaapapas.mp4,data/action_clips/train/pass/papaapapas.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_papaapapas.mp4
+train,pass,papapapsss.mp4,data/action_clips/train/pass/papapapsss.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_papapapsss.mp4
+train,pass,papapass.mp4,data/action_clips/train/pass/papapass.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_papapass.mp4
+train,pass,pas.mp4,data/action_clips/train/pass/pas.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_pas.mp4
+train,pass,pass.mp4,data/action_clips/train/pass/pass.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_pass.mp4
+train,pass,pass2.mp4,data/action_clips/train/pass/pass2.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_pass2.mp4
+train,pass,pass3.mp4,data/action_clips/train/pass/pass3.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_pass3.mp4
+train,pass,pass4.mp4,data/action_clips/train/pass/pass4.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_pass4.mp4
+train,pass,passaa.mp4,data/action_clips/train/pass/passaa.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/train_passaa.mp4
+train,pass,passas.mp4,data/action_clips/train/pass/passas.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passas.mp4
+train,pass,passe.mp4,data/action_clips/train/pass/passe.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passe.mp4
+train,pass,passs.mp4,data/action_clips/train/pass/passs.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passs.mp4
+train,pass,passsas.mp4,data/action_clips/train/pass/passsas.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passsas.mp4
+train,pass,passsss.mp4,data/action_clips/train/pass/passsss.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passsss.mp4
+train,pass,passssy.mp4,data/action_clips/train/pass/passssy.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/train_passssy.mp4
+train,pass,passsw.mp4,data/action_clips/train/pass/passsw.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passsw.mp4
+train,pass,passy.mp4,data/action_clips/train/pass/passy.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/train_passy.mp4
+train,pass,peas.mp4,data/action_clips/train/pass/peas.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/train_peas.mp4
+train,pass,pp.mp4,data/action_clips/train/pass/pp.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/train_pp.mp4
+val,pass,paaaas.mp4,data/action_clips/val/pass/paaaas.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/val_paaaas.mp4
+val,pass,paaaass.mp4,data/action_clips/val/pass/paaaass.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/val_paaaass.mp4
+val,pass,pass.mp4,data/action_clips/val/pass/pass.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/val_pass.mp4
+val,pass,passe.mp4,data/action_clips/val/pass/passe.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/val_passe.mp4
+val,pass,passsss.mp4,data/action_clips/val/pass/passsss.mp4,pass,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/pass/val_passsss.mp4
+val,pass,passsssss.mp4,data/action_clips/val/pass/passsssss.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/val_passsssss.mp4
+val,pass,passsssssss.mp4,data/action_clips/val/pass/passsssssss.mp4,pass,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox,data/action_clips/no_leakage/train/pass/val_passsssssss.mp4
+train,other,o.mp4,data/action_clips/train/other/o.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_o.mp4
+train,other,oeether.mp4,data/action_clips/train/other/oeether.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_oeether.mp4
+train,other,oo.mp4,data/action_clips/train/other/oo.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_oo.mp4
+train,other,ooo.mp4,data/action_clips/train/other/ooo.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_ooo.mp4
+train,other,ooy.mp4,data/action_clips/train/other/ooy.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_ooy.mp4
+train,other,oth.mp4,data/action_clips/train/other/oth.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_oth.mp4
+train,other,othee.mp4,data/action_clips/train/other/othee.mp4,other,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/other/train_othee.mp4
+train,other,other.mp4,data/action_clips/train/other/other.mp4,other,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/other/train_other.mp4
+train,other,otherhehe.mp4,data/action_clips/train/other/otherhehe.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_otherhehe.mp4
+train,other,otherr.mp4,data/action_clips/train/other/otherr.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_otherr.mp4
+train,other,otherre.mp4,data/action_clips/train/other/otherre.mp4,other,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/other/train_otherre.mp4
+train,other,otherrewe.mp4,data/action_clips/train/other/otherrewe.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_otherrewe.mp4
+train,other,oto.mp4,data/action_clips/train/other/oto.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_oto.mp4
+train,other,ototot.mp4,data/action_clips/train/other/ototot.mp4,other,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/other/train_ototot.mp4
+train,other,otthjer.mp4,data/action_clips/train/other/otthjer.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_otthjer.mp4
+train,other,oyot.mp4,data/action_clips/train/other/oyot.mp4,other,TOR_HFX_HIGH_OR_FINALS,val,less common high-score/finals TOR/HFX scorebox,data/action_clips/no_leakage/val/other/train_oyot.mp4
+train,other,po.mp4,data/action_clips/train/other/po.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_po.mp4
+train,other,ttoer.mp4,data/action_clips/train/other/ttoer.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_ttoer.mp4
+train,other,woower.mp4,data/action_clips/train/other/woower.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/train_woower.mp4
+val,other,My Movie.mp4,data/action_clips/val/other/My Movie.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/val_My Movie.mp4
+val,other,aother.mp4,data/action_clips/val/other/aother.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/val_aother.mp4
+val,other,otother.mp4,data/action_clips/val/other/otother.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/val_otother.mp4
+val,other,otototo.mp4,data/action_clips/val/other/otototo.mp4,other,TOR_HFX_COMMON,train,common low-score TOR/HFX scorebox or non-play graphic,data/action_clips/no_leakage/train/other/val_otototo.mp4
+val,other,qw.mp4,data/action_clips/val/other/qw.mp4,other,HFX_GA,val,visible HFX/GA scorebox,data/action_clips/no_leakage/val/other/val_qw.mp4

@@ -1,0 +1,29 @@
+{
+  "labels": [
+    "other",
+    "pass",
+    "shot_goal",
+    "shot_save"
+  ],
+  "label_map_name": "no_leakage_actions",
+  "label_map": {
+    "pass": "pass",
+    "other": "other",
+    "shot_goal": "shot_goal",
+    "shot_save": "shot_save"
+  },
+  "train_counts": {
+    "other": 18,
+    "pass": 25,
+    "shot_goal": 16,
+    "shot_save": 22
+  },
+  "val_counts": {
+    "other": 6,
+    "pass": 8,
+    "shot_goal": 12,
+    "shot_save": 9
+  },
+  "frames": 8,
+  "size": 96
+}

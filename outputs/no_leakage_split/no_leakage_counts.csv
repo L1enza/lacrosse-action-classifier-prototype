@@ -1,0 +1,12 @@
+target_split,target_label,game_group,count
+train,other,TOR_HFX_COMMON,18
+train,pass,TOR_HFX_COMMON,25
+train,shot_goal,TOR_HFX,16
+train,shot_save,TOR_HFX,12
+train,shot_save,TOR_ROC,10
+val,other,HFX_GA,1
+val,other,TOR_HFX_HIGH_OR_FINALS,5
+val,pass,TOR_HFX_HIGH_OR_FINALS,8
+val,shot_goal,HFX_GA,12
+val,shot_save,COL_PC,5
+val,shot_save,HFX_GA,4

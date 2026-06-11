@@ -20,6 +20,12 @@ LABEL_MAPS = {
         "shot_goal": "shot_goal",
         "shot_save": "shot_save",
     },
+    "no_leakage_actions": {
+        "pass": "pass",
+        "other": "other",
+        "shot_goal": "shot_goal",
+        "shot_save": "shot_save",
+    },
 }
 
 
