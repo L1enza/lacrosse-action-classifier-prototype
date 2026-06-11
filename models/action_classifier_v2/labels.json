@@ -1,0 +1,28 @@
+{
+  "labels": [
+    "other",
+    "pass",
+    "shot_goal",
+    "shot_save"
+  ],
+  "label_map": {
+    "pass": "pass",
+    "goal": "shot_goal",
+    "save": "shot_save",
+    "other": "other"
+  },
+  "train_counts": {
+    "other": 19,
+    "pass": 26,
+    "shot_goal": 23,
+    "shot_save": 28
+  },
+  "val_counts": {
+    "other": 5,
+    "pass": 7,
+    "shot_goal": 5,
+    "shot_save": 3
+  },
+  "frames": 8,
+  "size": 96
+}
