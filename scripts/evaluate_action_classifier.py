@@ -9,7 +9,7 @@ import torch
 from predict_action import TinyVideoClassifier, get_device, load_video_tensor
 
 
-EXPECTED_LABELS = {
+DEFAULT_EXPECTED_LABELS = {
     "pass": "pass",
     "goal": "shot_goal",
     "save": "shot_save",
@@ -65,7 +65,10 @@ def write_csv(records, labels, path):
 
 def make_chart(records, labels, path):
     known_records = [record for record in records if record["expected"]]
-    folders = ["pass", "goal", "save", "other"]
+    folders = []
+    for record in known_records:
+        if record["folder"] not in folders:
+            folders.append(record["folder"])
 
     accuracy = []
     counts = []
@@ -84,7 +87,7 @@ def make_chart(records, labels, path):
     fig, axes = plt.subplots(1, 2, figsize=(13, 5), gridspec_kw={"width_ratios": [1.25, 1]})
     fig.suptitle("Prototype 2 Lacrosse Action Classifier", fontsize=16, fontweight="bold")
 
-    colors = ["#3b82f6", "#22c55e", "#f97316", "#64748b"]
+    colors = ["#3b82f6", "#22c55e", "#f97316", "#64748b", "#7c3aed", "#0f766e"]
     bars = axes[0].bar(folders, accuracy, color=colors)
     axes[0].set_title("Accuracy By Labeled Folder")
     axes[0].set_ylabel("Correct Predictions (%)")
@@ -133,7 +136,12 @@ def print_summary(records):
     for record in known_records:
         by_folder[record["folder"]].append(record)
 
-    for folder in ["pass", "goal", "save", "other"]:
+    folders = []
+    for record in known_records:
+        if record["folder"] not in folders:
+            folders.append(record["folder"])
+
+    for folder in folders:
         folder_records = by_folder[folder]
         folder_total = len(folder_records)
         folder_correct = sum(1 for record in folder_records if record["correct"] == "1")
@@ -161,6 +169,8 @@ def main():
     metadata = checkpoint.get("metadata", {})
     frames = int(metadata.get("frames", 8))
     size = int(metadata.get("size", 96))
+    expected_labels = dict(DEFAULT_EXPECTED_LABELS)
+    expected_labels.update(metadata.get("label_map", {}))
 
     device = get_device()
     model = TinyVideoClassifier(num_classes=len(labels), frames=frames).to(device)
@@ -171,7 +181,7 @@ def main():
     records = []
 
     for split, folder, clip_path in collect_clips(args.data):
-        expected = EXPECTED_LABELS.get(folder)
+        expected = expected_labels.get(folder)
         predicted, confidence, scores = predict_clip(model, clip_path, labels, frames, size, device)
         correct = "" if expected is None else str(int(predicted == expected))
         record = {

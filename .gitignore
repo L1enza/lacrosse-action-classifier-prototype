@@ -5,6 +5,7 @@ __pycache__/
 venv/
 .env
 .env.*
+work/
 
 # Local video data and raw footage
 data/**/*.mp4

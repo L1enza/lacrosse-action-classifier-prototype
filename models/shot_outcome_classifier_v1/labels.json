@@ -1,0 +1,21 @@
+{
+  "labels": [
+    "shot_goal",
+    "shot_save"
+  ],
+  "label_map_name": "shot_outcome",
+  "label_map": {
+    "shot_goal": "shot_goal",
+    "shot_save": "shot_save"
+  },
+  "train_counts": {
+    "shot_goal": 16,
+    "shot_save": 22
+  },
+  "val_counts": {
+    "shot_goal": 12,
+    "shot_save": 9
+  },
+  "frames": 8,
+  "size": 96
+}

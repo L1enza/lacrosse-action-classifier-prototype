@@ -1,0 +1,7 @@
+target_label,game,target_split,count
+shot_goal,HFX_GA,val,12
+shot_goal,TOR_HFX,train,16
+shot_save,COL_PC,val,5
+shot_save,HFX_GA,val,4
+shot_save,TOR_HFX,train,12
+shot_save,TOR_ROC,train,10

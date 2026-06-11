@@ -9,11 +9,17 @@ from torch import nn
 from torch.utils.data import DataLoader, Dataset
 
 
-DEFAULT_LABEL_MAP = {
+LABEL_MAPS = {
+    "all_actions": {
     "pass": "pass",
     "goal": "shot_goal",
     "save": "shot_save",
     "other": "other",
+    },
+    "shot_outcome": {
+        "shot_goal": "shot_goal",
+        "shot_save": "shot_save",
+    },
 }
 
 
@@ -155,16 +161,18 @@ def main():
     parser.add_argument("--frames", type=int, default=8)
     parser.add_argument("--size", type=int, default=96)
     parser.add_argument("--lr", type=float, default=1e-3)
+    parser.add_argument("--label-map", choices=sorted(LABEL_MAPS), default="all_actions")
     args = parser.parse_args()
 
-    labels = sorted(set(DEFAULT_LABEL_MAP.values()))
+    label_map = LABEL_MAPS[args.label_map]
+    labels = sorted(set(label_map.values()))
     label_to_idx = {label: index for index, label in enumerate(labels)}
 
     train_data = LacrosseClipDataset(
-        args.data / "train", label_to_idx, DEFAULT_LABEL_MAP, args.frames, args.size
+        args.data / "train", label_to_idx, label_map, args.frames, args.size
     )
     val_data = LacrosseClipDataset(
-        args.data / "val", label_to_idx, DEFAULT_LABEL_MAP, args.frames, args.size
+        args.data / "val", label_to_idx, label_map, args.frames, args.size
     )
 
     train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
@@ -178,7 +186,8 @@ def main():
     args.output.mkdir(parents=True, exist_ok=True)
     metadata = {
         "labels": labels,
-        "label_map": DEFAULT_LABEL_MAP,
+        "label_map_name": args.label_map,
+        "label_map": label_map,
         "train_counts": count_by_label(train_data, labels),
         "val_counts": count_by_label(val_data, labels),
         "frames": args.frames,
