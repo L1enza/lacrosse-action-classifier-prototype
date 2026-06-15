@@ -56,6 +56,7 @@ Prototype 2/
     predict_action.py
     long_video_predict.py
     track_players.py
+    extract_motion_features.py
     evaluate_action_classifier.py
 ```
 
@@ -180,6 +181,26 @@ frame,time_seconds,track_id,class_name,confidence,x1,y1,x2,y2,center_x,center_y,
 ```
 
 This is the first step toward motion features like player speed, direction changes, spacing, and possession-transfer guesses.
+
+## Extract Motion Features
+
+After tracking players, convert the raw boxes into motion features:
+
+```bash
+python3 scripts/extract_motion_features.py \
+  --tracks outputs/player_tracking/21.44/player_tracks.csv \
+  --output-dir outputs/player_tracking/21.44_motion
+```
+
+This writes:
+
+```text
+outputs/player_tracking/21.44_motion/track_motion_features.csv
+outputs/player_tracking/21.44_motion/frame_motion_summary.csv
+outputs/player_tracking/21.44_motion/motion_summary.json
+```
+
+The track-level file includes player speed, movement direction, distance moved, box size, and total distance for each tracked player. The frame-level file summarizes how much player movement is happening at each timestamp.
 
 ## Evaluate All Clips
 
