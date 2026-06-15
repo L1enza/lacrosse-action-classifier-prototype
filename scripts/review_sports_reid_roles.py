@@ -49,34 +49,30 @@ def box_area(bbox):
 
 def lacrosse_ref_scores(crop):
     if crop is None or crop.size == 0:
-        return {
-            "stripe_score": 0.0,
-            "shirt_black_ratio": 0.0,
-            "shirt_white_ratio": 0.0,
-            "shirt_column_std": 0.0,
-            "dark_lower_ratio": 0.0,
-            "ref_score": 0.0,
-        }
+        return empty_ref_scores()
 
     h, w = crop.shape[:2]
-    shirt = crop[int(h * 0.18) : max(int(h * 0.60), int(h * 0.18) + 1), :]
-    lower = crop[int(h * 0.58) : max(int(h * 0.92), int(h * 0.58) + 1), :]
-    if shirt.size == 0 or lower.size == 0:
-        return {
-            "stripe_score": 0.0,
-            "shirt_black_ratio": 0.0,
-            "shirt_white_ratio": 0.0,
-            "shirt_column_std": 0.0,
-            "dark_lower_ratio": 0.0,
-            "ref_score": 0.0,
-        }
+    center_x1 = int(w * 0.12)
+    center_x2 = max(center_x1 + 1, int(w * 0.88))
+    shirt = crop[
+        int(h * 0.16) : max(int(h * 0.66), int(h * 0.16) + 1),
+        center_x1:center_x2,
+    ]
+    head = crop[: max(1, int(h * 0.24)), center_x1:center_x2]
+    lower = crop[
+        int(h * 0.56) : max(int(h * 0.94), int(h * 0.56) + 1),
+        center_x1:center_x2,
+    ]
+    if shirt.size == 0 or head.size == 0 or lower.size == 0:
+        return empty_ref_scores()
 
     shirt_gray = cv2.cvtColor(shirt, cv2.COLOR_BGR2GRAY)
     shirt_hsv = cv2.cvtColor(shirt, cv2.COLOR_BGR2HSV)
+    head_hsv = cv2.cvtColor(head, cv2.COLOR_BGR2HSV)
     lower_gray = cv2.cvtColor(lower, cv2.COLOR_BGR2GRAY)
 
-    black = shirt_gray < 70
-    white = (shirt_gray > 170) & (shirt_hsv[:, :, 1] < 85)
+    black = shirt_gray < 85
+    white = (shirt_gray > 145) & (shirt_hsv[:, :, 1] < 125)
     black_ratio = float(np.mean(black))
     white_ratio = float(np.mean(white))
     hue = shirt_hsv[:, :, 0]
@@ -84,24 +80,50 @@ def lacrosse_ref_scores(crop):
     val = shirt_hsv[:, :, 2]
     red_orange = (((hue <= 25) | (hue >= 165)) & (sat > 70) & (val > 70))
     red_orange_ratio = float(np.mean(red_orange))
+    head_red_orange_ratio = red_orange_mask(head_hsv)
 
     col_profile = shirt_gray.mean(axis=0)
     row_profile = shirt_gray.mean(axis=1)
     column_std = float(np.std(col_profile))
     row_std = float(np.std(row_profile))
     vertical_orientation = column_std / max(column_std + row_std, 1e-6)
-    color_penalty = max(0.0, 1.0 - red_orange_ratio / 0.12)
-    raw_stripe_score = (
-        min(1.0, black_ratio / 0.18)
-        * min(1.0, white_ratio / 0.12)
-        * min(1.0, column_std / 45.0)
-        * min(1.0, vertical_orientation / 0.58)
-        * color_penalty
-    )
+    dark_lower_ratio = float(np.mean(lower_gray < 95))
 
-    dark_lower_ratio = float(np.mean(lower_gray < 85))
-    stripe_score = raw_stripe_score if dark_lower_ratio >= 0.20 else raw_stripe_score * 0.35
-    ref_score = 0.75 * stripe_score + 0.25 * min(1.0, dark_lower_ratio / 0.45)
+    black_columns = np.mean(black, axis=0)
+    white_columns = np.mean(white, axis=0)
+    column_state = np.zeros(len(black_columns), dtype=np.int8)
+    column_state[black_columns > 0.22] = -1
+    column_state[white_columns > 0.18] = 1
+    active_columns = column_state[column_state != 0]
+    transitions = int(np.sum(active_columns[1:] != active_columns[:-1])) if len(active_columns) > 1 else 0
+    transition_score = min(1.0, transitions / 5.0)
+    active_column_ratio = float(np.mean(column_state != 0)) if len(column_state) else 0.0
+
+    stripe_balance = min(black_ratio / 0.20, white_ratio / 0.10, 1.0)
+    vertical_texture = min(1.0, column_std / 34.0) * min(1.0, vertical_orientation / 0.46)
+    red_orange_penalty = max(0.35, 1.0 - max(0.0, red_orange_ratio - 0.20) / 0.35)
+    stripe_score = (
+        0.40 * stripe_balance
+        + 0.30 * transition_score
+        + 0.20 * vertical_texture
+        + 0.10 * min(1.0, active_column_ratio / 0.65)
+    )
+    stripe_score *= red_orange_penalty
+
+    dark_lower_score = min(1.0, dark_lower_ratio / 0.58)
+    player_like_penalty = 1.0
+    if white_ratio > 0.32 and black_ratio < 0.08:
+        player_like_penalty *= 0.45
+    if black_ratio > 0.30 and white_ratio < 0.06:
+        player_like_penalty *= 0.55
+    if dark_lower_ratio < 0.18:
+        player_like_penalty *= 0.45
+    if head_red_orange_ratio > 0.10:
+        player_like_penalty *= max(
+            0.12, 1.0 - (head_red_orange_ratio - 0.10) / 0.22
+        )
+
+    ref_score = (0.78 * stripe_score + 0.22 * dark_lower_score) * player_like_penalty
 
     return {
         "stripe_score": stripe_score,
@@ -110,9 +132,56 @@ def lacrosse_ref_scores(crop):
         "shirt_column_std": column_std,
         "shirt_row_std": row_std,
         "vertical_orientation": vertical_orientation,
+        "stripe_transitions": transitions,
+        "active_column_ratio": active_column_ratio,
         "red_orange_ratio": red_orange_ratio,
+        "head_red_orange_ratio": head_red_orange_ratio,
         "dark_lower_ratio": dark_lower_ratio,
         "ref_score": ref_score,
+    }
+
+
+def red_orange_mask(hsv_image):
+    hue = hsv_image[:, :, 0]
+    sat = hsv_image[:, :, 1]
+    val = hsv_image[:, :, 2]
+    return float(np.mean(((hue <= 25) | (hue >= 165)) & (sat > 70) & (val > 70)))
+
+
+def track_ref_likelihood(track):
+    likelihood = float(track.get("player_likelihood") or 0.0)
+    observations = float(track.get("num_observations") or 0.0)
+    duration = float(track.get("duration") or 0.0)
+
+    person_score = np.clip((likelihood - 0.18) / 0.42, 0.0, 1.0)
+    if track.get("is_player") is True:
+        person_score = max(person_score, 0.85)
+    observation_score = min(1.0, observations / 15.0)
+    duration_score = min(1.0, duration / 1.0)
+
+    # Crowd/board artifacts can look striped in a tiny crop. A real official
+    # should still behave like a person track across multiple frames.
+    return float(
+        (0.75 * person_score + 0.25)
+        * (0.55 + 0.45 * observation_score)
+        * (0.55 + 0.45 * duration_score)
+    )
+
+
+def empty_ref_scores():
+    return {
+        "stripe_score": 0.0,
+        "shirt_black_ratio": 0.0,
+        "shirt_white_ratio": 0.0,
+        "shirt_column_std": 0.0,
+        "shirt_row_std": 0.0,
+        "vertical_orientation": 0.0,
+        "stripe_transitions": 0,
+        "active_column_ratio": 0.0,
+        "red_orange_ratio": 0.0,
+        "head_red_orange_ratio": 0.0,
+        "dark_lower_ratio": 0.0,
+        "ref_score": 0.0,
     }
 
 
@@ -189,6 +258,11 @@ def main():
             continue
         crop = crop_frame(args.video, obs["frame_index"], obs["bbox"])
         scores = lacrosse_ref_scores(crop)
+        visual_ref_score = scores["ref_score"]
+        track_score = track_ref_likelihood(track)
+        scores["visual_ref_score"] = visual_ref_score
+        scores["track_ref_likelihood"] = track_score
+        scores["ref_score"] = visual_ref_score * track_score
         row = {
             "track_id": track.get("track_id"),
             "start_time": track.get("start_time"),
