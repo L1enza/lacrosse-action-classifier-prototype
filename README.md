@@ -232,6 +232,24 @@ outputs/player_tracking/21.44_windows/motion_windows_summary.json
 
 Each row is one time window with features like player count, unique tracks, max speed, total movement distance, and a simple motion burst score. These window rows are the bridge between tracking data and future pass/shot/save/goal event labels.
 
+## Sports ReID Metadata
+
+Use `data/metadata/2019_black_wolves_bandits.json` for the 2019 Buffalo Bandits vs New England Black Wolves roster metadata.
+
+Run Andrew's sports ReID demo with the lacrosse smoke config:
+
+```bash
+cd "/Users/zllenza/Research /Prototype 2/third_party/sports_reID"
+
+python3 run_demo.py \
+  --video "/Users/zllenza/Research /Prototype 2/data/long_videos/newtest.mp4" \
+  --metadata "/Users/zllenza/Research /Prototype 2/data/metadata/2019_black_wolves_bandits.json" \
+  --output_dir "/Users/zllenza/Research /Prototype 2/outputs/sports_reid/black_wolves_bandits_30sec" \
+  --config "/Users/zllenza/Research /Prototype 2/configs/sports_reid_lacrosse_smoke.yaml"
+```
+
+The roster metadata is useful for jersey-number filtering, but it is not proof of identity. Treat identity outputs as experimental until jersey OCR and team-color rules are validated on lacrosse footage.
+
 ## Broadcast State Clips
 
 Use `data/broadcast_state_clips` for a separate `live` vs `replay` filter. This should run before event classification so replay windows do not get treated like live-game pass/shot/save/goal events.

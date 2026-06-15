@@ -1,0 +1,322 @@
+{
+  "home_team": "Buffalo Bandits",
+  "away_team": "New England Black Wolves",
+  "identity_labels_available": true,
+  "visible_jersey_numbers": {
+    "Buffalo Bandits": [
+      4,
+      7,
+      8,
+      12,
+      19,
+      20,
+      21,
+      22,
+      23,
+      25,
+      33,
+      37,
+      45,
+      48,
+      78,
+      81,
+      91,
+      92,
+      94,
+      95
+    ],
+    "New England Black Wolves": [
+      4,
+      8,
+      9,
+      10,
+      13,
+      14,
+      17,
+      20,
+      22,
+      23,
+      24,
+      26,
+      27,
+      29,
+      30,
+      33,
+      77,
+      81,
+      83,
+      86,
+      98
+    ]
+  },
+  "team_colors": {
+    "Buffalo Bandits": {
+      "shirt": "#f6a800",
+      "shorts": "#000000"
+    },
+    "New England Black Wolves": {
+      "shirt": "#d35400",
+      "shorts": "#000000"
+    }
+  },
+  "public_source": {
+    "dataset": "Wikipedia season roster pages",
+    "source_clip": "user-provided broadcast clip",
+    "roster_source": "user_provided_from_wikipedia",
+    "buffalo_roster_url": "https://en.wikipedia.org/wiki/2019_Buffalo_Bandits_season",
+    "new_england_roster_url": "https://en.wikipedia.org/wiki/2019_New_England_Black_Wolves_season",
+    "license_note": "Wikipedia text is available under Creative Commons Attribution-ShareAlike 4.0; verify roster against official game materials before using as ground truth."
+  },
+  "rosters": {
+    "Buffalo Bandits": [
+      {
+        "player_name": "Zach Higgins",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 33,
+        "position": "G"
+      },
+      {
+        "player_name": "Matt Vinc",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 48,
+        "position": "G"
+      },
+      {
+        "player_name": "Bryce Sweeting",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 7,
+        "position": "D"
+      },
+      {
+        "player_name": "Mitch de Snoo",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 12,
+        "position": "D"
+      },
+      {
+        "player_name": "Matthew Bennett",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 19,
+        "position": "D"
+      },
+      {
+        "player_name": "Nick Weiss",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 20,
+        "position": "D"
+      },
+      {
+        "player_name": "Justin Martin",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 21,
+        "position": "D"
+      },
+      {
+        "player_name": "Steve Priolo",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 23,
+        "position": "D"
+      },
+      {
+        "player_name": "Matt Spanger",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 25,
+        "position": "D"
+      },
+      {
+        "player_name": "Ryan Wagner",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 94,
+        "position": "D"
+      },
+      {
+        "player_name": "Josh Byrne",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 22,
+        "position": "F"
+      },
+      {
+        "player_name": "Corey Small",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 45,
+        "position": "F"
+      },
+      {
+        "player_name": "Jordan Durston",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 78,
+        "position": "F"
+      },
+      {
+        "player_name": "Thomas Hoggarth",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 91,
+        "position": "F"
+      },
+      {
+        "player_name": "Dhane Smith",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 92,
+        "position": "F"
+      },
+      {
+        "player_name": "Chase Fraser",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 95,
+        "position": "F"
+      },
+      {
+        "player_name": "Ian MacKay",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 4,
+        "position": "T"
+      },
+      {
+        "player_name": "Kevin Brownell",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 8,
+        "position": "T"
+      },
+      {
+        "player_name": "Ethan O'Connor",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 37,
+        "position": "T"
+      },
+      {
+        "player_name": "Matt Gilray",
+        "team_name": "Buffalo Bandits",
+        "jersey_number": 81,
+        "position": "T"
+      }
+    ],
+    "New England Black Wolves": [
+      {
+        "player_name": "Alex Buque",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 29,
+        "position": "G"
+      },
+      {
+        "player_name": "Doug Jamieson",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 30,
+        "position": "G"
+      },
+      {
+        "player_name": "Adam Bomberry",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 10,
+        "position": "D"
+      },
+      {
+        "player_name": "David Brock",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 4,
+        "position": "D"
+      },
+      {
+        "player_name": "Joel Coyle",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 24,
+        "position": "D"
+      },
+      {
+        "player_name": "Greg Downing",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 8,
+        "position": "D"
+      },
+      {
+        "player_name": "Ryan Fournier",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 81,
+        "position": "D"
+      },
+      {
+        "player_name": "Brett Manney",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 13,
+        "position": "D"
+      },
+      {
+        "player_name": "Jackson Nishimura",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 26,
+        "position": "D"
+      },
+      {
+        "player_name": "Andrew Suitor",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 20,
+        "position": "D"
+      },
+      {
+        "player_name": "Kevin Buchanan",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 27,
+        "position": "F"
+      },
+      {
+        "player_name": "Nick Chaykowsky",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 22,
+        "position": "F"
+      },
+      {
+        "player_name": "Callum Crawford",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 98,
+        "position": "F"
+      },
+      {
+        "player_name": "Tyler Digby",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 23,
+        "position": "F"
+      },
+      {
+        "player_name": "Dereck Downs",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 77,
+        "position": "F"
+      },
+      {
+        "player_name": "Dave Emala",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 14,
+        "position": "F"
+      },
+      {
+        "player_name": "JP Kealey",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 83,
+        "position": "F"
+      },
+      {
+        "player_name": "Stephan Leblanc",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 86,
+        "position": "F"
+      },
+      {
+        "player_name": "Reilly O'Connor",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 9,
+        "position": "F"
+      },
+      {
+        "player_name": "Colton Watkinson",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 17,
+        "position": "T"
+      },
+      {
+        "player_name": "John LaFontaine",
+        "team_name": "New England Black Wolves",
+        "jersey_number": 33,
+        "position": "T"
+      }
+    ]
+  }
+}
