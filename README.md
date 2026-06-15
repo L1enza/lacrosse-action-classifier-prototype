@@ -57,6 +57,7 @@ Prototype 2/
     long_video_predict.py
     track_players.py
     extract_motion_features.py
+    build_motion_windows.py
     evaluate_action_classifier.py
 ```
 
@@ -201,6 +202,28 @@ outputs/player_tracking/21.44_motion/motion_summary.json
 ```
 
 The track-level file includes player speed, movement direction, distance moved, box size, and total distance for each tracked player. The frame-level file summarizes how much player movement is happening at each timestamp.
+
+## Build Motion Windows
+
+Summarize the motion features into fixed 3-second windows:
+
+```bash
+python3 scripts/build_motion_windows.py \
+  --frame-summary outputs/player_tracking/21.44_motion/frame_motion_summary.csv \
+  --track-motion outputs/player_tracking/21.44_motion/track_motion_features.csv \
+  --output-dir outputs/player_tracking/21.44_windows \
+  --window-seconds 3 \
+  --stride-seconds 1
+```
+
+This writes:
+
+```text
+outputs/player_tracking/21.44_windows/motion_windows.csv
+outputs/player_tracking/21.44_windows/motion_windows_summary.json
+```
+
+Each row is one time window with features like player count, unique tracks, max speed, total movement distance, and a simple motion burst score. These window rows are the bridge between tracking data and future pass/shot/save/goal event labels.
 
 ## Evaluate All Clips
 
