@@ -14,9 +14,9 @@ compare tracking-motion features against real lacrosse events.
 Recommended labels:
 
 - `pass`
+- `shot`
 - `shot_goal`
 - `shot_save`
 - `shot_miss`
 - `other`
 - `replay`
-
