@@ -55,6 +55,7 @@ Prototype 2/
     train_action_classifier.py
     predict_action.py
     long_video_predict.py
+    track_players.py
     evaluate_action_classifier.py
 ```
 
@@ -148,6 +149,37 @@ The event JSON is the first bridge toward full event segmentation:
   }
 ]
 ```
+
+## Track Players With YOLO
+
+Use `track_players.py` to start building motion data from bounding boxes instead of only classifying raw pixels.
+
+```bash
+python3 scripts/track_players.py \
+  --video "data/long_videos/21.44.mp4" \
+  --output-dir outputs/player_tracking/21.44 \
+  --model yolov8n.pt \
+  --confidence 0.25 \
+  --image-size 960 \
+  --frame-stride 5 \
+  --save-preview
+```
+
+The script filters to people by default, tracks them with ByteTrack, and writes:
+
+```text
+outputs/player_tracking/21.44/player_tracks.csv
+outputs/player_tracking/21.44/metadata.json
+outputs/player_tracking/21.44/tracking_preview.mp4
+```
+
+Each CSV row is one detected player box:
+
+```text
+frame,time_seconds,track_id,class_name,confidence,x1,y1,x2,y2,center_x,center_y,width,height
+```
+
+This is the first step toward motion features like player speed, direction changes, spacing, and possession-transfer guesses.
 
 ## Evaluate All Clips
 
