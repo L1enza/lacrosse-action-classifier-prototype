@@ -24,5 +24,6 @@ outputs/**/*.avi
 outputs/long_video_predictions/
 outputs/random_test_contact_sheets/
 outputs/player_tracking/
+outputs/sports_reid/
 Random Tests/
 third_party/
