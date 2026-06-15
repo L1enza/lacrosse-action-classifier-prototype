@@ -1,0 +1,10 @@
+video,start,end,label,source,notes
+data/long_videos/test2.mp4,1.0,2.0,shot_save,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,5.0,6.0,pass,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,7.0,10.0,other,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,15.0,16.0,pass,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,18.0,20.0,other,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,21.0,22.0,pass,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,22.0,23.0,pass,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,24.0,25.0,shot_save,user_review,"User-reviewed rough label."
+data/long_videos/test2.mp4,26.0,30.0,other,user_review,"User-reviewed rough label."
