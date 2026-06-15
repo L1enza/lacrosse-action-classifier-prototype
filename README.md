@@ -43,6 +43,13 @@ Prototype 2/
           other/
           shot_goal/
           shot_save/
+    broadcast_state_clips/
+      train/
+        live/
+        replay/
+      val/
+        live/
+        replay/
   models/
     action_classifier_no_leakage_v1/
       labels.json
@@ -224,6 +231,29 @@ outputs/player_tracking/21.44_windows/motion_windows_summary.json
 ```
 
 Each row is one time window with features like player count, unique tracks, max speed, total movement distance, and a simple motion burst score. These window rows are the bridge between tracking data and future pass/shot/save/goal event labels.
+
+## Broadcast State Clips
+
+Use `data/broadcast_state_clips` for a separate `live` vs `replay` filter. This should run before event classification so replay windows do not get treated like live-game pass/shot/save/goal events.
+
+```text
+data/broadcast_state_clips/
+  train/
+    live/
+    replay/
+  val/
+    live/
+    replay/
+```
+
+Label by broadcast state, not just camera angle:
+
+```text
+live = live gameplay, usually scorebug visible
+replay = replay/cutaway, often no scorebug
+```
+
+A replay can still look like the normal live camera view. If the scorebug disappears because the broadcast is showing a replay, label it `replay`.
 
 ## Evaluate All Clips
 
