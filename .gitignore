@@ -22,3 +22,5 @@ outputs/**/*.mp4
 outputs/**/*.mov
 outputs/**/*.avi
 outputs/long_video_predictions/
+outputs/random_test_contact_sheets/
+Random Tests/

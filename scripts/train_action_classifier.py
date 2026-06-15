@@ -6,7 +6,7 @@ import cv2
 import numpy as np
 import torch
 from torch import nn
-from torch.utils.data import DataLoader, Dataset
+from torch.utils.data import DataLoader, Dataset, WeightedRandomSampler
 
 
 LABEL_MAPS = {
@@ -25,6 +25,12 @@ LABEL_MAPS = {
         "other": "other",
         "shot_goal": "shot_goal",
         "shot_save": "shot_save",
+    },
+    "pass_binary": {
+        "pass": "pass",
+        "other": "not_pass",
+        "shot_goal": "not_pass",
+        "shot_save": "not_pass",
     },
 }
 
@@ -158,6 +164,21 @@ def count_by_label(dataset, labels):
     return counts
 
 
+def class_weights(dataset, num_classes):
+    counts = torch.zeros(num_classes, dtype=torch.float32)
+    for _, class_idx in dataset.samples:
+        counts[class_idx] += 1
+    counts = torch.clamp(counts, min=1.0)
+    return counts.sum() / (num_classes * counts)
+
+
+def sample_weights(dataset, weights):
+    return torch.tensor(
+        [float(weights[class_idx]) for _, class_idx in dataset.samples],
+        dtype=torch.float32,
+    )
+
+
 def main():
     parser = argparse.ArgumentParser()
     parser.add_argument("--data", type=Path, required=True)
@@ -168,7 +189,12 @@ def main():
     parser.add_argument("--size", type=int, default=96)
     parser.add_argument("--lr", type=float, default=1e-3)
     parser.add_argument("--label-map", choices=sorted(LABEL_MAPS), default="all_actions")
+    parser.add_argument("--class-balanced-loss", action="store_true")
+    parser.add_argument("--balanced-sampler", action="store_true")
+    parser.add_argument("--seed", type=int, default=7)
     args = parser.parse_args()
+
+    torch.manual_seed(args.seed)
 
     label_map = LABEL_MAPS[args.label_map]
     labels = sorted(set(label_map.values()))
@@ -181,13 +207,27 @@ def main():
         args.data / "val", label_to_idx, label_map, args.frames, args.size
     )
 
-    train_loader = DataLoader(train_data, batch_size=args.batch_size, shuffle=True)
+    weights = class_weights(train_data, len(labels))
+    sampler = None
+    shuffle = True
+    if args.balanced_sampler:
+        sampler = WeightedRandomSampler(
+            sample_weights(train_data, weights),
+            num_samples=len(train_data),
+            replacement=True,
+        )
+        shuffle = False
+
+    train_loader = DataLoader(
+        train_data, batch_size=args.batch_size, shuffle=shuffle, sampler=sampler
+    )
     val_loader = DataLoader(val_data, batch_size=args.batch_size, shuffle=False)
 
     device = get_device()
     model = TinyVideoClassifier(num_classes=len(labels), frames=args.frames).to(device)
     optimizer = torch.optim.AdamW(model.parameters(), lr=args.lr, weight_decay=1e-4)
-    criterion = nn.CrossEntropyLoss()
+    criterion_weights = weights.to(device) if args.class_balanced_loss else None
+    criterion = nn.CrossEntropyLoss(weight=criterion_weights)
 
     args.output.mkdir(parents=True, exist_ok=True)
     metadata = {
@@ -198,6 +238,12 @@ def main():
         "val_counts": count_by_label(val_data, labels),
         "frames": args.frames,
         "size": args.size,
+        "class_balanced_loss": args.class_balanced_loss,
+        "balanced_sampler": args.balanced_sampler,
+        "class_weights": {
+            label: float(weights[index]) for index, label in enumerate(labels)
+        },
+        "seed": args.seed,
     }
     (args.output / "labels.json").write_text(json.dumps(metadata, indent=2))
 
@@ -205,6 +251,12 @@ def main():
     print(f"Labels: {labels}", flush=True)
     print(f"Train counts: {metadata['train_counts']}", flush=True)
     print(f"Val counts: {metadata['val_counts']}", flush=True)
+    print(f"Class weights: {metadata['class_weights']}", flush=True)
+    print(
+        f"Balanced loss: {args.class_balanced_loss}, "
+        f"balanced sampler: {args.balanced_sampler}",
+        flush=True,
+    )
 
     best_acc = -1.0
     for epoch in range(1, args.epochs + 1):
