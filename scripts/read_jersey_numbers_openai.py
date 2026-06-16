@@ -100,6 +100,16 @@ def group_manifest_rows(rows, max_images):
     return grouped
 
 
+def track_quality(rows):
+    return max(float(row.get("quality_score") or 0.0) for row in rows)
+
+
+def parse_track_ids(value):
+    if not value:
+        return None
+    return [item.strip() for item in value.split(",") if item.strip()]
+
+
 def encode_image(path):
     return base64.b64encode(Path(path).read_bytes()).decode("utf-8")
 
@@ -195,6 +205,17 @@ def main():
     parser.add_argument("--model", default="gpt-5.5")
     parser.add_argument("--max-images-per-track", type=int, default=8)
     parser.add_argument("--limit-tracks", type=int, default=None)
+    parser.add_argument(
+        "--track-ids",
+        default="",
+        help="Comma-separated track IDs to read. Overrides --sort-tracks-by.",
+    )
+    parser.add_argument(
+        "--sort-tracks-by",
+        choices=["quality", "track_id"],
+        default="quality",
+        help="How to choose tracks when --limit-tracks is used.",
+    )
     parser.add_argument("--dry-run", action="store_true")
     args = parser.parse_args()
 
@@ -202,7 +223,20 @@ def main():
     manifest_rows = read_csv(args.manifest)
     _, by_team, by_number = load_roster(args.metadata)
     grouped = group_manifest_rows(manifest_rows, args.max_images_per_track)
-    track_ids = sorted(grouped, key=lambda value: int(value))
+    explicit_track_ids = parse_track_ids(args.track_ids)
+    if explicit_track_ids is not None:
+        missing = [track_id for track_id in explicit_track_ids if track_id not in grouped]
+        if missing:
+            raise RuntimeError(f"Track IDs not found in manifest: {missing}")
+        track_ids = explicit_track_ids
+    elif args.sort_tracks_by == "quality":
+        track_ids = sorted(
+            grouped,
+            key=lambda value: (track_quality(grouped[value]), -int(value)),
+            reverse=True,
+        )
+    else:
+        track_ids = sorted(grouped, key=lambda value: int(value))
     if args.limit_tracks is not None:
         track_ids = track_ids[: args.limit_tracks]
 
@@ -219,6 +253,7 @@ def main():
             {
                 "track_id": track_id,
                 "team_candidate": team_candidate,
+                "track_quality": f"{track_quality(rows):.6f}",
                 "candidate_numbers": candidates,
                 "crop_paths": [row["crop_path"] for row in rows],
             }
@@ -251,6 +286,7 @@ def main():
             {
                 "track_id": track_id,
                 "team_candidate": team_candidate,
+                "track_quality": f"{track_quality(rows):.6f}",
                 "candidate_numbers": candidates,
                 "crop_paths": [row["crop_path"] for row in rows],
                 "result": result,
