@@ -45,11 +45,19 @@ def load_identity_reads(path, confidence_threshold):
     return reads
 
 
-def label_for_track(row, reads):
+def label_for_track(row, reads, show_unknown_ids):
     track_id = int(row["track_id"])
+    role = row.get("role") or "player"
+    if role == "referee":
+        return f"REF id {track_id}"
+    if role == "goalkeeper":
+        return f"GK id {track_id}"
+    if role == "non_player":
+        return f"NON id {track_id}"
+
     read = reads.get(track_id)
     if not read:
-        return f"id {track_id}"
+        return f"id {track_id}" if show_unknown_ids else ""
     number = read.get("number") or "?"
     player = read.get("matched_player") or ""
     confidence = float(read.get("confidence") or 0.0)
@@ -65,7 +73,13 @@ def short_name(name):
     return f"{parts[0][0]}. {' '.join(parts[1:])}"
 
 
-def color_for_track(track_id, has_identity):
+def color_for_track(track_id, has_identity, role):
+    if role == "referee":
+        return (235, 235, 235)
+    if role == "goalkeeper":
+        return (255, 70, 70)
+    if role == "non_player":
+        return (100, 100, 100)
     if has_identity:
         return (40, 220, 80)
     palette = [
@@ -78,15 +92,21 @@ def color_for_track(track_id, has_identity):
     return palette[track_id % len(palette)]
 
 
-def draw_detection(frame, row, reads):
+def draw_detection(frame, row, reads, show_unknown_ids):
+    role = row.get("role") or "player"
+    if role == "non_player":
+        return
+
     track_id = int(row["track_id"])
     has_identity = track_id in reads
-    color = color_for_track(track_id, has_identity)
+    color = color_for_track(track_id, has_identity, role)
     x1 = int(float(row["x1"]))
     y1 = int(float(row["y1"]))
     x2 = int(float(row["x2"]))
     y2 = int(float(row["y2"]))
-    label = label_for_track(row, reads)
+    label = label_for_track(row, reads, show_unknown_ids)
+    if not label:
+        return
 
     cv2.rectangle(frame, (x1, y1), (x2, y2), color, 2)
     text_size, _ = cv2.getTextSize(label, cv2.FONT_HERSHEY_SIMPLEX, 0.5, 1)
@@ -122,6 +142,11 @@ def main():
     parser.add_argument("--output", type=Path, required=True)
     parser.add_argument("--confidence-threshold", type=float, default=0.55)
     parser.add_argument("--max-seconds", type=float, default=None)
+    parser.add_argument(
+        "--hide-unknown-ids",
+        action="store_true",
+        help="Only draw refs/goalies and tracks with accepted jersey reads.",
+    )
     args = parser.parse_args()
 
     args.output.parent.mkdir(parents=True, exist_ok=True)
@@ -153,7 +178,7 @@ def main():
         if not ok:
             break
         for row in tracks.get(frame_index, []):
-            draw_detection(frame, row, reads)
+            draw_detection(frame, row, reads, show_unknown_ids=not args.hide_unknown_ids)
         writer.write(frame)
         frame_index += 1
         if frame_index % 150 == 0:
